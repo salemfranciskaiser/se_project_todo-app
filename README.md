@@ -1,17 +1,28 @@
-# Simple Todo App
+# Simple To-Do App
 
-Give a brief description of the project here. Feel free to give it a different name.
+A simple and clean to-do list web application where users can manage daily tasks. Built with modular JavaScript and Object-Oriented Programming concepts.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+- View a list of pre-loaded tasks
+- Add new to-dos with a title and optional due date
+- Mark tasks as completed using checkboxes
+- Delete tasks individually
+- All to-dos are rendered dynamically using a class-based system
+- Input validation is handled using a reusable FormValidator class
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+- HTML5
+- CSS3 with BEM-style classes and reusable blocks
+- JavaScript (ES6 Modules and OOP)
+- Live form validation logic via a custom `FormValidator` class
+- Task rendering using a `Todo` class
+- UUIDs for unique task identification
+- Deployed via GitHub Pages
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+🔗 [View Live Site](https://salemfranciskaiser.github.io/se_project_todo-app/)
