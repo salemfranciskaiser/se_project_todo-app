@@ -4,23 +4,20 @@ class Todo {
     this._templateElement = document.querySelector(selector);
   }
 
+  _generateCheckboxEl() {
+    this._todoCheckboxEl.checked = this._data.completed;
+    this._todoCheckboxEl.id = `todo-${this._data.id}`;
+    this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
+  }
+
   _setEventListeners() {
-    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
-    todoCheckboxEl.addEventListener('change', () => {
-    this._data.completed = todoCheckboxEl.checked;
+    this._todoCheckboxEl.addEventListener("change", () => {
+      this._data.completed = this._todoCheckboxEl.checked;
     });
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
-    todoDeleteBtn.addEventListener("click", () => {
+
+    this._todoDeleteBtn.addEventListener("click", () => {
       this._todoElement.remove();
     });
-}
-
-  _generateCheckboxEl() {
-    const todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
-    const todoLabel = this._todoElement.querySelector(".todo__label");
-    todoCheckboxEl.checked = this._data.completed;
-    todoCheckboxEl.id = `todo-${this._data.id}`;
-    todoLabel.setAttribute("for", `todo-${this._data.id}`);
   }
 
   getView() {
@@ -28,18 +25,23 @@ class Todo {
       .querySelector(".todo")
       .cloneNode(true);
 
-    const todoNameEl = this._todoElement.querySelector(".todo__name");
-    const todoDate = this._todoElement.querySelector(".todo__date");
-    const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+    this._todoNameEl = this._todoElement.querySelector(".todo__name");
+    this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+    this._todoLabel = this._todoElement.querySelector(".todo__label");
+    this._todoDate = this._todoElement.querySelector(".todo__date");
+    this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
-    
+    this._todoNameEl.textContent = this._data.name;
 
-    todoNameEl.textContent = this._data.name;
-    todoDate.textContent = `${this._data.date.toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })}`;
+    if (this._data.date instanceof Date && !isNaN(this._data.date)) {
+      this._todoDate.textContent = this._data.date.toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    } else {
+      this._todoDate.textContent = "Date not set";
+    }
 
     this._generateCheckboxEl();
     this._setEventListeners();
