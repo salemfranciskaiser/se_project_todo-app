@@ -42,7 +42,6 @@ addTodoForm.addEventListener("submit", (evt) => {
   renderTodo(values); 
 
   closeModal(addTodoPopup);
-  addTodoForm.reset(); // Optional: Reset form after submit
 });
 
 initialTodos.forEach(renderTodo);

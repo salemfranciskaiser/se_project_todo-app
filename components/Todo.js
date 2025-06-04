@@ -40,7 +40,7 @@ class Todo {
         day: "numeric",
       });
     } else {
-      this._todoDate.textContent = "Date not set";
+      this._todoDate.textContent = "";
     }
 
     this._generateCheckboxEl();
