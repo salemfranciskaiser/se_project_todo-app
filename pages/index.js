@@ -18,14 +18,25 @@ const todosList = document.querySelector(".todos__list");
 const section = new Section({
   items: initialTodos,
   renderer: (item) => {
-    const todo = new Todo(item, "#todo-template", (isChecked) => {
-      counter.updateCompleted(isChecked);
-    });
+    const todo = new Todo(
+      item,
+      "#todo-template",
+      (isChecked) => {
+        counter.updateCompleted(isChecked);
+      },
+      (wasCompleted) => {
+        counter.updateTotal(false);
+        if (wasCompleted) {
+          counter.updateCompleted(false);
+        }
+      }
+    );
     const todoElement = todo.getView();
     section.addItem(todoElement);
   },
   containerSelector: ".todos__list",
 });
+
 section.renderItems();
 const counter = new TodoCounter(initialTodos, ".counter__text");
 
@@ -34,15 +45,26 @@ const popupWithForm = new PopupWithForm("#add-todo-popup", (inputData) => {
     name: inputData.name,
     date: new Date(inputData.date),
     id: uuidv4(),
-    completed: false, // Required by TodoCounter
+    completed: false,
   };
 
-  const todo = new Todo(newTodo, "#todo-template", (isChecked) => {
-    counter.updateCompleted(isChecked);
-  });
+  const todo = new Todo(
+    newTodo,
+    "#todo-template",
+    (isChecked) => {
+      counter.updateCompleted(isChecked);
+    },
+    (wasCompleted) => {
+      counter.updateTotal(false);
+      if (wasCompleted) {
+        counter.updateCompleted(false);
+      }
+    }
+  );
+
   const todoElement = todo.getView();
   section.addItem(todoElement);
-  counter.updateTotal(true); // Increment total count
+  counter.updateTotal(true);
 });
 
 popupWithForm.setEventListeners();
