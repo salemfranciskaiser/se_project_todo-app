@@ -1,7 +1,8 @@
 class Todo {
-  constructor(data, selector) {
+  constructor(data, selector, handleToggleComplete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
+    this._handleToggleComplete = handleToggleComplete;
   }
 
   _generateCheckboxEl() {
@@ -13,6 +14,7 @@ class Todo {
   _setEventListeners() {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = this._todoCheckboxEl.checked;
+      this._handleToggleComplete(this._todoCheckboxEl.checked);
     });
 
     this._todoDeleteBtn.addEventListener("click", () => {
