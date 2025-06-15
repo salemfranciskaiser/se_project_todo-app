@@ -21,11 +21,12 @@ class Popup {
   }
 
   setEventListeners() {
-    this._popup.querySelector(".popup__close").addEventListener("click", () => this.close());
-
-    
+    // Unified handler: closes popup when clicking overlay or close-icon
     this._popup.addEventListener("mousedown", (evt) => {
-      if (evt.target === this._popup) {
+      if (
+        evt.target === this._popup ||
+        evt.target.classList.contains("popup__close")
+      ) {
         this.close();
       }
     });
@@ -33,3 +34,4 @@ class Popup {
 }
 
 export default Popup;
+
